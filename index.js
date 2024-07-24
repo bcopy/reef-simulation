@@ -160,171 +160,168 @@ loadFile('shaders/utils.glsl').then((utils) => {
   }
 
 
-  class Caustics {
+class Caustics {
+  constructor(waterGeometry) {
+    this._camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 2);
 
-    constructor(lightFrontGeometry) {
-      this._camera = new THREE.OrthographicCamera(0, 1, 1, 0, 0, 2000);
+    this._geometry = waterGeometry.clone();
 
-      this._geometry = lightFrontGeometry;
+    this.texture = new THREE.WebGLRenderTarget(1024, 1024, {type: THREE.UNSIGNED_BYTE});
 
-      this.texture = new THREE.WebGLRenderTarget(1024, 1024, {type: THREE.UNSIGNED_BYTE});
+    const shadersPromises = [
+      loadFile('shaders/caustics/vertex.glsl'),
+      loadFile('shaders/caustics/fragment.glsl')
+    ];
 
-      const shadersPromises = [
-        loadFile('shaders/caustics/vertex.glsl'),
-        loadFile('shaders/caustics/fragment.glsl')
-      ];
-
-      this.loaded = Promise.all(shadersPromises)
-          .then(([vertexShader, fragmentShader]) => {
+    this.loaded = Promise.all(shadersPromises)
+      .then(([vertexShader, fragmentShader]) => {
         const material = new THREE.RawShaderMaterial({
           uniforms: {
-              light: { value: light },
-              water: { value: null },
+            light: { value: light },
+            water: { value: null },
           },
           vertexShader: vertexShader,
           fragmentShader: fragmentShader,
         });
 
         this._causticMesh = new THREE.Mesh(this._geometry, material);
+        this._causticMesh.rotation.x = -Math.PI / 2; // Align with water surface
       });
-    }
-
-    update(renderer, waterTexture) {
-      this._causticMesh.material.uniforms['water'].value = waterTexture;
-
-      renderer.setRenderTarget(this.texture);
-      renderer.setClearColor(black, 0);
-      renderer.clear();
-
-      // TODO Camera is useless here, what should be done?
-      renderer.render(this._causticMesh, this._camera);
-    }
-
   }
 
+  update(renderer, waterTexture) {
+    this._causticMesh.material.uniforms['water'].value = waterTexture;
 
-  class Water {
+    renderer.setRenderTarget(this.texture);
+    renderer.setClearColor(black, 0);
+    renderer.clear();
 
-    constructor() {
-      this.geometry = new THREE.PlaneBufferGeometry(2, 2, 200, 200);
+    renderer.render(this._causticMesh, this._camera);
+  }
+}
 
-      const shadersPromises = [
-        loadFile('shaders/water/vertex.glsl'),
-        loadFile('shaders/water/fragment.glsl')
-      ];
 
-      this.loaded = Promise.all(shadersPromises)
-          .then(([vertexShader, fragmentShader]) => {
+class Water {
+  constructor() {
+    const radius = 1.5;
+    const segments = 64;
+
+    this.geometry = new THREE.CircleBufferGeometry(radius, segments);
+
+    const shadersPromises = [
+      loadFile('shaders/water/vertex.glsl'),
+      loadFile('shaders/water/fragment.glsl')
+    ];
+
+    this.loaded = Promise.all(shadersPromises)
+      .then(([vertexShader, fragmentShader]) => {
         this.material = new THREE.RawShaderMaterial({
           uniforms: {
-              light: { value: light },
-              tiles: { value: tiles },
-              sky: { value: textureCube },
-              water: { value: null },
-              causticTex: { value: null },
-              underwater: { value: false },
+            light: { value: light },
+            tiles: { value: tiles },
+            sky: { value: textureCube },
+            water: { value: null },
+            causticTex: { value: null },
+            underwater: { value: false },
           },
           vertexShader: vertexShader,
           fragmentShader: fragmentShader,
         });
 
         this.mesh = new THREE.Mesh(this.geometry, this.material);
+        this.mesh.rotation.x = -Math.PI / 2; // Rotate to lay flat
       });
-    }
-
-    draw(renderer, waterTexture, causticsTexture) {
-      this.material.uniforms['water'].value = waterTexture;
-      this.material.uniforms['causticTex'].value = causticsTexture;
-
-      this.material.side = THREE.FrontSide;
-      this.material.uniforms['underwater'].value = true;
-      renderer.render(this.mesh, camera);
-
-      this.material.side = THREE.BackSide;
-      this.material.uniforms['underwater'].value = false;
-      renderer.render(this.mesh, camera);
-    }
-
   }
 
+  draw(renderer, waterTexture, causticsTexture) {
+    this.material.uniforms['water'].value = waterTexture;
+    this.material.uniforms['causticTex'].value = causticsTexture;
+
+    this.material.side = THREE.FrontSide;
+    this.material.uniforms['underwater'].value = true;
+    renderer.render(this.mesh, camera);
+
+    this.material.side = THREE.BackSide;
+    this.material.uniforms['underwater'].value = false;
+    renderer.render(this.mesh, camera);
+  }
+}
 
   class Pool {
+  constructor() {
+    this._geometry = new THREE.BufferGeometry();
+    
+    // Increase the height by changing the y-coordinates
+    // and create a cylindrical shape by using trigonometric functions
+    const radius = 1.5;
+    const height = 0.05; // Increased height
+    const segments = 64; // Number of segments for the cylinder
+    
+    const vertices = [];
+    const indices = [];
+    
+    // Create vertices
+    for (let i = 0; i <= segments; i++) {
+      const theta = (i / segments) * Math.PI * 2;
+      const sinTheta = Math.sin(theta);
+      const cosTheta = Math.cos(theta);
+      
+      // Top circle
+      vertices.push(radius * cosTheta, height, radius * sinTheta);
+      // Bottom circle
+      vertices.push(radius * cosTheta, -height, radius * sinTheta);
+    }
+    
+    // Center points for top and bottom
+    vertices.push(0, height, 0);
+    vertices.push(0, -height, 0);
+    
+    // Create indices
+    for (let i = 0; i < segments; i++) {
+      const i2 = i * 2;
+      // Side faces
+      indices.push(i2, i2 + 2, i2 + 1);
+      indices.push(i2 + 1, i2 + 2, i2 + 3);
+      // Top face
+      indices.push(i2, vertices.length / 3 - 2, i2 + 2);
+      // Bottom face
+      indices.push(i2 + 1, i2 + 3, vertices.length / 3 - 1);
+    }
 
-    constructor() {
-      this._geometry = new THREE.BufferGeometry();
-      const vertices = new Float32Array([
-        -1, -1, -1,
-        -1, -1, 1,
-        -1, 1, -1,
-        -1, 1, 1,
-        1, -1, -1,
-        1, 1, -1,
-        1, -1, 1,
-        1, 1, 1,
-        -1, -1, -1,
-        1, -1, -1,
-        -1, -1, 1,
-        1, -1, 1,
-        -1, 1, -1,
-        -1, 1, 1,
-        1, 1, -1,
-        1, 1, 1,
-        -1, -1, -1,
-        -1, 1, -1,
-        1, -1, -1,
-        1, 1, -1,
-        -1, -1, 1,
-        1, -1, 1,
-        -1, 1, 1,
-        1, 1, 1
-      ]);
-      const indices = new Uint32Array([
-        0, 1, 2,
-        2, 1, 3,
-        4, 5, 6,
-        6, 5, 7,
-        12, 13, 14,
-        14, 13, 15,
-        16, 17, 18,
-        18, 17, 19,
-        20, 21, 22,
-        22, 21, 23
-      ]);
+    this._geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    this._geometry.setIndex(indices);
+    this._geometry.computeVertexNormals(); // Compute normals for proper lighting
 
-      this._geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
-      this._geometry.setIndex(new THREE.BufferAttribute(indices, 1));
+    const shadersPromises = [
+      loadFile('shaders/pool/vertex.glsl'),
+      loadFile('shaders/pool/fragment.glsl')
+    ];
 
-      const shadersPromises = [
-        loadFile('shaders/pool/vertex.glsl'),
-        loadFile('shaders/pool/fragment.glsl')
-      ];
-
-      this.loaded = Promise.all(shadersPromises)
-          .then(([vertexShader, fragmentShader]) => {
+    this.loaded = Promise.all(shadersPromises)
+      .then(([vertexShader, fragmentShader]) => {
         this._material = new THREE.RawShaderMaterial({
           uniforms: {
-              light: { value: light },
-              tiles: { value: tiles },
-              water: { value: null },
-              causticTex: { value: null },
+            light: { value: light },
+            tiles: { value: tiles },
+            water: { value: null },
+            causticTex: { value: null },
           },
           vertexShader: vertexShader,
           fragmentShader: fragmentShader,
         });
-        this._material.side = THREE.FrontSide;
+        this._material.side = THREE.DoubleSide; // Render both sides of faces
 
         this._mesh = new THREE.Mesh(this._geometry, this._material);
       });
-    }
-
-    draw(renderer, waterTexture, causticsTexture) {
-      this._material.uniforms['water'].value = waterTexture;
-      this._material.uniforms['causticTex'].value = causticsTexture;
-
-      renderer.render(this._mesh, camera);
-    }
-
   }
+
+  draw(renderer, waterTexture, causticsTexture) {
+    this._material.uniforms['water'].value = waterTexture;
+    this._material.uniforms['causticTex'].value = causticsTexture;
+
+    renderer.render(this._mesh, camera);
+  }
+}
 
 
   class Debug {
