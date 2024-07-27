@@ -68,7 +68,7 @@ loadFile('shaders/utils.glsl').then((utils) => {
 
   const textureloader = new THREE.TextureLoader();
 
-  const tiles = textureloader.load('tiles.jpg');
+  const tiles = textureloader.load('sand.jpg');
 
   class WaterSimulation {
 
@@ -82,10 +82,10 @@ loadFile('shaders/utils.glsl').then((utils) => {
       this.texture = this._textureA;
 
       const shadersPromises = [
-        loadFile('shaders/simulation/vertex.glsl'),
-        loadFile('shaders/simulation/drop_fragment.glsl'),
-        loadFile('shaders/simulation/normal_fragment.glsl'),
-        loadFile('shaders/simulation/update_fragment.glsl'),
+        loadFile('shaders/simulation-vertex.glsl'),
+        loadFile('shaders/simulation-drop_fragment.glsl'),
+        loadFile('shaders/simulation-normal_fragment.glsl'),
+        loadFile('shaders/simulation-update_fragment.glsl'),
       ];
 
       this.loaded = Promise.all(shadersPromises)
@@ -170,8 +170,8 @@ loadFile('shaders/utils.glsl').then((utils) => {
       this.texture = new THREE.WebGLRenderTarget(1024, 1024, {type: THREE.UNSIGNED_BYTE});
 
       const shadersPromises = [
-        loadFile('shaders/caustics/vertex.glsl'),
-        loadFile('shaders/caustics/fragment.glsl')
+        loadFile('shaders/caustics-vertex.glsl'),
+        loadFile('shaders/caustics-fragment.glsl')
       ];
 
       this.loaded = Promise.all(shadersPromises)
@@ -209,8 +209,8 @@ loadFile('shaders/utils.glsl').then((utils) => {
       this.geometry = new THREE.PlaneBufferGeometry(2, 2, 200, 200);
 
       const shadersPromises = [
-        loadFile('shaders/water/vertex.glsl'),
-        loadFile('shaders/water/fragment.glsl')
+        loadFile('shaders/water-vertex.glsl'),
+        loadFile('shaders/water-fragment.glsl')
       ];
 
       this.loaded = Promise.all(shadersPromises)
@@ -295,8 +295,8 @@ loadFile('shaders/utils.glsl').then((utils) => {
       this._geometry.setIndex(new THREE.BufferAttribute(indices, 1));
 
       const shadersPromises = [
-        loadFile('shaders/pool/vertex.glsl'),
-        loadFile('shaders/pool/fragment.glsl')
+        loadFile('shaders/pool-vertex.glsl'),
+        loadFile('shaders/pool-fragment.glsl')
       ];
 
       this.loaded = Promise.all(shadersPromises)
@@ -334,8 +334,8 @@ loadFile('shaders/utils.glsl').then((utils) => {
       this._geometry = new THREE.PlaneBufferGeometry();
 
       const shadersPromises = [
-        loadFile('shaders/debug/vertex.glsl'),
-        loadFile('shaders/debug/fragment.glsl')
+        loadFile('shaders/debug-vertex.glsl'),
+        loadFile('shaders/debug-fragment.glsl')
       ];
 
       this.loaded = Promise.all(shadersPromises)
