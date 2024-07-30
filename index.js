@@ -1,7 +1,15 @@
 const canvas = document.getElementById('canvas');
 
-const width = canvas.width;
-const height = canvas.height;
+let width, height;
+
+function updateSize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+}
+
+updateSize();
 
 // Colors
 const black = new THREE.Color('black');
@@ -20,16 +28,15 @@ function loadFile(filename) {
 // Shader chunks
 loadFile('shaders/utils.glsl').then((utils) => {
   THREE.ShaderChunk['utils'] = utils;
-
-  // Create Renderer
   const camera = new THREE.PerspectiveCamera(75, width / height, 0.01, 100);
   camera.position.set(0.426, 0.677, -2.095);
   camera.rotation.set(2.828, 0.191, 3.108);
 
+  
   const renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true, alpha: true});
   renderer.setSize(width, height);
   renderer.autoClear = false;
-
+  
   // Light direction
   const light = [0.7559289460184544, 0.7559289460184544, -0.3779644730092272];
 
@@ -51,10 +58,18 @@ loadFile('shaders/utils.glsl').then((utils) => {
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
   const targetgeometry = new THREE.PlaneGeometry(2, 2);
-  for (let vertex of targetgeometry.vertices) {
-    vertex.z = - vertex.y;
-    vertex.y = 0.;
+  
+  // Update the vertices of the plane
+  const positionAttribute = targetgeometry.getAttribute('position');
+  for (let i = 0; i < positionAttribute.count; i++) {
+      const vertex = new THREE.Vector3();
+      vertex.fromBufferAttribute(positionAttribute, i);
+      vertex.z = -vertex.y;
+      vertex.y = 0;
+      positionAttribute.setXYZ(i, vertex.x, vertex.y, vertex.z);
   }
+  positionAttribute.needsUpdate = true;
+
   const targetmesh = new THREE.Mesh(targetgeometry);
 
   // Textures
@@ -368,6 +383,14 @@ loadFile('shaders/utils.glsl').then((utils) => {
 
   const debug = new Debug();
 
+  window.addEventListener('resize', () => {
+      updateSize();
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+      controls.handleResize();
+  });
+
 
   // Main rendering loop
   function animate() {
@@ -381,6 +404,8 @@ loadFile('shaders/utils.glsl').then((utils) => {
     const causticsTexture = caustics.texture.texture;
 
     // debug.draw(renderer, causticsTexture);
+    
+    renderer.setSize(width, height);
 
     renderer.setRenderTarget(null);
     renderer.setClearColor(white, 1);
