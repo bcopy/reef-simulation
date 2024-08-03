@@ -176,45 +176,49 @@ loadFile('shaders/utils.glsl').then((utils) => {
 
 
   class Caustics {
-
     constructor(lightFrontGeometry) {
       this._camera = new THREE.OrthographicCamera(0, 1, 1, 0, 0, 2000);
-
+  
       this._geometry = lightFrontGeometry;
-
-      this.texture = new THREE.WebGLRenderTarget(1024, 1024, {type: THREE.UNSIGNED_BYTE});
-
+  
+      // Update the caustics texture size
+      this.textureSize = 1024;  // You can adjust this value
+      this.texture = new THREE.WebGLRenderTarget(this.textureSize, this.textureSize, {type: THREE.FloatType});
+  
       const shadersPromises = [
         loadFile('shaders/caustics-vertex.glsl'),
         loadFile('shaders/caustics-fragment.glsl')
       ];
-
+  
       this.loaded = Promise.all(shadersPromises)
-          .then(([vertexShader, fragmentShader]) => {
-        const material = new THREE.RawShaderMaterial({
-          uniforms: {
+        .then(([vertexShader, fragmentShader]) => {
+          const material = new THREE.RawShaderMaterial({
+            uniforms: {
               light: { value: light },
               water: { value: null },
-          },
-          vertexShader: vertexShader,
-          fragmentShader: fragmentShader,
+              worldSize: { value: new THREE.Vector2(2, 2) },  // Add this uniform
+            },
+            vertexShader: vertexShader,
+            fragmentShader: fragmentShader,
+          });
+  
+          this._causticMesh = new THREE.Mesh(this._geometry, material);
         });
-
-        this._causticMesh = new THREE.Mesh(this._geometry, material);
-      });
     }
-
+  
     update(renderer, waterTexture) {
       this._causticMesh.material.uniforms['water'].value = waterTexture;
-
+  
+      const currentRenderTarget = renderer.getRenderTarget();
+      
       renderer.setRenderTarget(this.texture);
       renderer.setClearColor(black, 0);
       renderer.clear();
-
-      // TODO Camera is useless here, what should be done?
+  
       renderer.render(this._causticMesh, this._camera);
+      
+      renderer.setRenderTarget(currentRenderTarget);
     }
-
   }
 
 
@@ -402,10 +406,6 @@ loadFile('shaders/utils.glsl').then((utils) => {
     caustics.update(renderer, waterTexture);
 
     const causticsTexture = caustics.texture.texture;
-
-    // debug.draw(renderer, causticsTexture);
-    
-    renderer.setSize(width, height);
 
     renderer.setRenderTarget(null);
     renderer.setClearColor(white, 1);
