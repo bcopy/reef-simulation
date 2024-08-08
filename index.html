@@ -5,26 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reef Simulator</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
+    <script src="js/linear-animation.js"></script>
     <script src="index.js"></script>
 </head>
 <body>
     
-    <a-scene fog="type: exponential; color: #0C4B5F; near: 0.5; far: 60; density: 0.001">
+    <a-scene fog="type: exponential; color: #0C4B5F; near: 0.5; far: 60; density: 0.001" shadow="type: pcfsoft">
         <a-assets>
           <img id="sandTexture" src="assets/sand.jpg">
           <img id="skybox" src="assets/skybox.png">
+          <a-asset-item id="shark-model" src="assets/shark.glb"></a-asset-item>
+          <a-asset-item id="turtle-model" src="assets/sea-turtle.glb"></a-asset-item>
         </a-assets>
   
         <!-- Underwater floor with sand texture -->
         <a-circle position="0 0 -4" rotation="-90 0 0" radius="40" segments="80" 
-                 material="src: #sandTexture; repeat: 5 5"></a-circle>
+                 material="src: #sandTexture; repeat: 5 5" shadow="receive: true"></a-circle>
   
         <!-- Stationary caustics effect using custom shader -->
-        <a-circle position="0 0.01 -4" rotation="-90 0 0" radius="40"   segments="80" 
-                 material="shader: stationary-caustics; color: #00aaff; transparent: true; blending: additive"></a-circle>
+        <a-circle position="0 0.01 -4" rotation="-90 0 0" radius="40" segments="80" 
+                 material="shader: stationary-caustics; color: #00aaff; transparent: true; blending: additive" shadow="receive: true"></a-circle>
   
         <!-- Water surface -->
-        <a-circle position="0 20 -4" rotation="-90 0 0" radius="40"  segments="80" 
+        <a-circle position="0 20 -4" rotation="-90 0 0" radius="40" segments="80" 
                  material="shader: water-surface; color: #7AD7F0; transparent: true; side: double"></a-circle>
   
         <!-- Bubble particle system -->
@@ -32,22 +37,33 @@
         <a-entity bubbles="count: 150; color: #e0e0ff; size: 0.01; speed: 0.1; opacity: 0.2" position="2 -0.15 -3"></a-entity>
         <a-entity bubbles="count: 150; color: #e0e0fd; size: 0.01; speed: 0.1; opacity: 0.2" position="3 0.5 -2"></a-entity>
   
+        <!-- Shark model -->
+        <a-entity id="shark" gltf-model="#shark-model" scale="0.02 0.02 0.02" rotation="0 90 0" 
+          linear-animation="startPosition: -20 5 -10; endPosition: 20 5 -10; duration: 20"
+          animation-mixer="loop: repeat" shadow="cast: true">
+            <a-box width="5" height="2" depth="1" material="opacity: 1" shadow="cast: true"></a-box>
+        </a-entity>
+
+        <a-entity id="turtle" gltf-model="#turtle-model" scale="10 10 10" rotation="0 270 0" 
+          linear-animation="startPosition: -10 10 -10; endPosition: 10 12 -10; duration: 10"
+          animation-mixer="loop: repeat" shadow="cast: true"></a-entity>
         
         <!-- Ambient light to simulate underwater lighting -->
-        <a-light type="ambient" color="#0C4B5F" intensity="0.7"></a-light>
+        <a-light type="ambient" color="#0C4B5F" intensity="0.3"></a-light>
   
-        <!-- Directional light to enhance the caustics effect -->
-        <a-light type="directional" color="#ffffff" intensity="0.8" position="-1 1 0" ></a-light>
+        <!-- Directional light to enhance the caustics effect and cast shadows -->
+        <a-light type="directional" color="#ffffff" intensity="0.8" position="-1 10 1" castShadow="true" 
+                 shadow="mapSize: 2048x2048; bias: -0.001; near: 0.5; far: 50"></a-light>
               
         <!-- Underwater sky color -->
         <a-sky src="#skybox" ></a-sky>
   
         <!-- Camera -->
-        <a-entity camera="near: 0.01; far: 10000" position="0 0 0" 
+        <a-entity camera="near: 0.01; far: 10000" position="0 4 0" 
             look-controls="pointerLockEnabled: true"
-            custom-wasd-controls="speed: 2"
-            simple-float="amplitude: 0.2; speed: 3; horizontalDrift: 0.02; minHeight: 0.8; tiltAmount: 2">
-  </a-entity>
+            custom-wasd-controls="speed: 4"
+            simple-float="amplitude: 0.3; speed: 3; horizontalDrift: 0.05; minHeight: 0.8; tiltAmount: 3">
+        </a-entity>
       </a-scene>
 </body>
 </html>
