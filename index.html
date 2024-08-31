@@ -46,10 +46,10 @@
             <a-box width="5" height="2" depth="1" material="opacity: 1" shadow="cast: true"></a-box>
         </a-entity>
 
-        <a-entity id="rock" gltf-model="#rock-model" position="0 0 0" scale="0.05 0.05 0.05" rotation="0 90 0" >     
-        <a-entity id="coral" surface-placer="target: #rock; position: -1.071 2.85 14; normal: 0.002 0.966 -0.257"
-                    scale="100 100 100" gltf-model="#coral-model" >
-          </a-entity>
+        <a-entity id="rock" gltf-model="#rock-model" position="0 0 0" scale="0.05 0.05 0.05">     
+            <a-entity id="coral" surface-placer="position: -1.071 2.85 14; normal: 0.002 0.966 -0.257; scale: 10"
+                     gltf-model="#coral-model" >
+            </a-entity>
         </a-entity> 
 
         <a-entity id="turtle" gltf-model="#turtle-model" scale="10 10 10" rotation="0 270 0" 

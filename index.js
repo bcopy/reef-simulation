@@ -295,39 +295,57 @@ AFRAME.registerShader('radial-gradient', {
 
 AFRAME.registerComponent('surface-placer', {
   schema: {
-    target: { type: 'selector' },
     position: { type: 'vec3' },
-    normal: { type: 'vec3' }
+    normal: { type: 'vec3' },
+    originalParentScale: { type: 'number', default: 1 },
+    scale: { type: 'number', default: 1 }  // Added scale for the coral
   },
 
   init: function() {
+    this.parentScale = new THREE.Vector3(1, 1, 1);
     this.placeOnSurface();
   },
 
-  update: function() {
-    this.placeOnSurface();
+  update: function(oldData) {
+    if (this.dataChanged(oldData)) {
+      this.placeOnSurface();
+    }
+  },
+
+  dataChanged: function(oldData) {
+    return (
+      !AFRAME.utils.deepEqual(oldData.position, this.data.position) ||
+      !AFRAME.utils.deepEqual(oldData.normal, this.data.normal) ||
+      oldData.originalParentScale !== this.data.originalParentScale ||
+      oldData.scale !== this.data.scale
+    );
+  },
+
+  tick: function() {
+    const newParentScale = this.el.parentEl.object3D.scale;
+    if (!this.parentScale.equals(newParentScale)) {
+      this.parentScale.copy(newParentScale);
+      this.placeOnSurface();
+    }
   },
 
   placeOnSurface: function() {
-    const targetEl = this.data.target;
-    if (!targetEl) {
-      console.warn('Target element not found');
-      return;
-    }
-
-    // Get the world position of the target element
-    const targetWorldPosition = new THREE.Vector3();
-    targetEl.object3D.getWorldPosition(targetWorldPosition);
-
-    // Calculate the world position of the placement point
-    const placementWorldPosition = new THREE.Vector3(
-      targetWorldPosition.x + this.data.position.x,
-      targetWorldPosition.y + this.data.position.y,
-      targetWorldPosition.z + this.data.position.z
+    // Calculate the scale ratio for position adjustment
+    const positionScaleRatio = this.data.originalParentScale / Math.max(this.parentScale.x, this.parentScale.y, this.parentScale.z);
+    
+    // Adjust the position based on the scale ratio
+    const adjustedPosition = new THREE.Vector3(
+      this.data.position.x * positionScaleRatio,
+      this.data.position.y * positionScaleRatio,
+      this.data.position.z * positionScaleRatio
     );
 
     // Set the position of this entity
-    this.el.object3D.position.copy(placementWorldPosition);
+    this.el.object3D.position.copy(adjustedPosition);
+
+    // Calculate and set the scale of the coral
+    const coralScale = this.data.scale / Math.max(this.parentScale.x, this.parentScale.y, this.parentScale.z);
+    this.el.object3D.scale.set(coralScale, coralScale, coralScale);
 
     // Calculate the rotation based on the normal vector
     const up = new THREE.Vector3(0, 1, 0);
