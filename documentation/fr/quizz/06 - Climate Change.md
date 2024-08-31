@@ -4,7 +4,7 @@
 
 Imagine que toute la Terre avait de la fièvre. C'est un peu ce qu'est le changement climatique. Quand notre planète se réchauffe, cela affecte nos océans de plusieurs façons. L'eau devient plus chaude, la glace dans les régions froides fond, et le niveau de la mer monte. Cela cause des problèmes pour les créatures marines et même pour les gens vivant près des côtes.
 
-Le changement climatique peut rendre les tempêtes plus fortes, changer l'endroit où vivent les poissons, et rendre plus difficile pour certains animaux marins de trouver de la nourriture ou de construire leurs maisons. C'est un gros problème, mais il y a beaucoup de façons d'aider à ralentir le changement climatique et à protéger nos océans.
+Le changement climatique peut rendre les tempêtes plus fortes, forcer les poissons à migrer, et rendre plus difficile pour certains animaux marins de trouver de la nourriture ou de construire leurs maisons. C'est un gros problème, mais il y a beaucoup de façons d'aider à ralentir le changement climatique et à protéger nos océans.
 
 Explorons ensemble des solutions et testons tes connaissances sur la façon dont le changement climatique affecte nos océans et ce que nous pouvons faire pour aider !
 
@@ -29,7 +29,7 @@ Explorons ensemble des solutions et testons tes connaissances sur la façon dont
 4. Lequel de ces éléments pourrait nous aider à retirer l'excès de dioxyde de carbone de l'air ?
    a) Des ventilateurs géants pour le souffler ailleurs
    **b) Des machines qui transforment le CO2 en pierre**
-   c) Planter plus d'arbres et d'herbes marines
+   c) Planter plus d'herbes marines
    d) Une armée d'animaux en ballon pour le faire flotter dans l'espace
 
 5. Qu'est-ce qui pourrait nous aider à suivre les changements de température de l'océan au fil du temps ?

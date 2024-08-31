@@ -18,6 +18,14 @@ Please use the following categories when creating or referring to quizz around o
 14. Aquaculture (when not managed sustainably)
 15. Ghost Fishing
 
+# E's shortlist
+
+1. Coral bleaching (nice and visual, color schemes etc...)
+2. Plastic Pollution
+4. Overfishing
+6. Climate change
+7. Marine Pollution
+
 ## Notes
 - These categories represent major threats to marine ecosystems.
 - Many of these threats are interconnected and can exacerbate each other.

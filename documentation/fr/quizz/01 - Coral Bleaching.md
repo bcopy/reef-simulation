@@ -37,7 +37,7 @@ Maintenant, testons tes connaissances sur le blanchissement des coraux et sur la
 5. Qu'est-ce qui pourrait nous aider à faire pousser de nouveaux coraux pour remplacer ceux qui ont blanchi ?
    a) Des pépinières de coraux
    b) Des jardins de coraux sous-marins
-   c) Une garderie pour bébés coraux
+   c)  our bébés coraux
    **d) Tout ce qui précède**
 
 6. Lequel de ces éléments pourrait aider à protéger les coraux des fortes vagues pendant les tempêtes ?

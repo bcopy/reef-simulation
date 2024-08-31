@@ -43,7 +43,7 @@ Maintenant, testons tes connaissances sur l'acidification des océans et comment
 6. Lequel de ces éléments pourrait aider à stabiliser le pH de l'eau localement ?
    **a) Ajouter du calcaire dans certaines zones**
    b) Mélanger l'océan avec une cuillère géante
-   c) Demander gentiment à l'océan de être moins acide
+   c) Demander gentiment à l'océan d'être moins acide
    d) Utiliser un énorme filtre à café pour l'océan
 
 7. Comment pourrait-on aider les récifs coralliens à survivre à l'acidification ?
