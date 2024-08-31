@@ -18,6 +18,8 @@
           <img id="skybox" src="assets/skybox.png">
           <a-asset-item id="shark-model" src="assets/shark.glb"></a-asset-item>
           <a-asset-item id="turtle-model" src="assets/sea-turtle.glb"></a-asset-item>
+          <a-asset-item id="rock-model" src="assets/rock.glb"></a-asset-item>
+          <a-asset-item id="coral-model" src="assets/coral.glb"></a-asset-item>
         </a-assets>
   
         <!-- Underwater floor with sand texture -->
@@ -44,6 +46,12 @@
             <a-box width="5" height="2" depth="1" material="opacity: 1" shadow="cast: true"></a-box>
         </a-entity>
 
+        <a-entity id="rock" gltf-model="#rock-model" position="0 0 0" scale="0.05 0.05 0.05" rotation="0 90 0" >     
+        <a-entity id="coral" surface-placer="target: #rock; position: -1.071 2.85 14; normal: 0.002 0.966 -0.257"
+                    scale="100 100 100" gltf-model="#coral-model" >
+          </a-entity>
+        </a-entity> 
+
         <a-entity id="turtle" gltf-model="#turtle-model" scale="10 10 10" rotation="0 270 0" 
           linear-animation="startPosition: -10 10 -10; endPosition: 10 12 -10; duration: 10"
           animation-mixer="loop: repeat" shadow="cast: true"></a-entity>
@@ -59,7 +67,7 @@
         <a-sky src="#skybox" ></a-sky>
   
         <!-- Camera -->
-        <a-entity camera="near: 0.01; far: 10000" position="0 4 0" 
+        <a-entity camera="near: 0.01; far: 10000" position="0 4 20" 
             look-controls="pointerLockEnabled: true"
             custom-wasd-controls="speed: 4"
             simple-float="amplitude: 0.3; speed: 3; horizontalDrift: 0.05; minHeight: 0.8; tiltAmount: 3">

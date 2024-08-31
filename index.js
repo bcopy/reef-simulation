@@ -292,6 +292,56 @@ AFRAME.registerShader('radial-gradient', {
   `
 });
 
+
+AFRAME.registerComponent('surface-placer', {
+  schema: {
+    target: { type: 'selector' },
+    position: { type: 'vec3' },
+    normal: { type: 'vec3' }
+  },
+
+  init: function() {
+    this.placeOnSurface();
+  },
+
+  update: function() {
+    this.placeOnSurface();
+  },
+
+  placeOnSurface: function() {
+    const targetEl = this.data.target;
+    if (!targetEl) {
+      console.warn('Target element not found');
+      return;
+    }
+
+    // Get the world position of the target element
+    const targetWorldPosition = new THREE.Vector3();
+    targetEl.object3D.getWorldPosition(targetWorldPosition);
+
+    // Calculate the world position of the placement point
+    const placementWorldPosition = new THREE.Vector3(
+      targetWorldPosition.x + this.data.position.x,
+      targetWorldPosition.y + this.data.position.y,
+      targetWorldPosition.z + this.data.position.z
+    );
+
+    // Set the position of this entity
+    this.el.object3D.position.copy(placementWorldPosition);
+
+    // Calculate the rotation based on the normal vector
+    const up = new THREE.Vector3(0, 1, 0);
+    const normal = new THREE.Vector3(this.data.normal.x, this.data.normal.y, this.data.normal.z);
+    normal.normalize();
+
+    const quaternion = new THREE.Quaternion();
+    quaternion.setFromUnitVectors(up, normal);
+
+    // Apply the rotation
+    this.el.object3D.quaternion.copy(quaternion);
+  }
+});
+
 AFRAME.registerComponent('custom-wasd-controls', {
   schema: {
     speed: { type: 'number', default: 5 }
