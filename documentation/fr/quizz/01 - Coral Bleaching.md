@@ -1,6 +1,4 @@
-# Catégorie 1 - Blanchissement des Coraux : Quiz pour Jeunes Gardiens des Récifs
-
-## Introduction : Qu'est-ce que le Blanchissement des Coraux ?
+# Quiz sur le blanchissement des coraux
 
 Imagine une ville sous-marine colorée où vivent les poissons et d'autres créatures marines. Cette ville est faite de coraux, et elle est généralement pleine de couleurs vives. Mais parfois, ces couleurs peuvent disparaître, laissant le corail blanc ou "blanchi". C'est ce qu'on appelle le blanchissement des coraux.
 
@@ -10,62 +8,62 @@ Le blanchissement des coraux est un gros problème car de nombreux animaux marin
 
 Maintenant, testons tes connaissances sur le blanchissement des coraux et sur la façon dont nous pouvons aider à sauver nos villes sous-marines colorées !
 
-1. Qu'est-ce qui pourrait nous aider à savoir si l'eau devient trop chaude pour les coraux ?
-   a) Un poisson spécial qui change de couleur
-   **b) Un thermomètre sous-marin**
-   c) Une bague d'humeur pour corail
-   d) Un sous-marin
+1. Quelle est la principale cause du blanchissement des coraux ?
+   a) Les poissons mangent la couleur des coraux
+   b) Les plongeurs peignent les coraux en blanc
+   c) L'eau de l'océan devient trop froide
+   **d) L'eau de l'océan devient trop chaude**
 
-2. Lequel de ces éléments pourrait aider à protéger les coraux du soleil et de la chaleur ?
-   a) Des parapluies sous-marins
-   b) De la crème solaire flottante
-   c) Des algues géantes
-   **d) Tout ce qui précède**
+2. Qu'est-ce qui donne aux coraux leurs belles couleurs ?
+   a) Des peintures naturelles dans l'eau
+   b) Des poissons multicolores qui vivent à l'intérieur
+   **c) De minuscules algues qui vivent dans le corail**
+   d) Des coquillages colorés collés au corail
 
-3. Qu'est-ce qui pourrait aider à refroidir l'eau autour des coraux chauds ?
-   a) Des ventilateurs sous-marins
-   b) Des glaçons
-   c) Des arroseurs d'eau froide
-   **d) Tout ce qui précède**
+3. Que pourrions-nous utiliser dans notre jeu pour refroidir l'eau autour des coraux ?
+   a) Un énorme glaçon magique
+   b) Un ventilateur sous-marin géant
+   c) Des ombrelles flottantes pour bloquer le soleil
+   **d) Toutes les réponses ci-dessus**
 
-4. Lequel de ces éléments pourrait aider à nettoyer l'eau autour des coraux ?
-   a) Un aspirateur géant sous-marin
-   b) Un savon spécial pour coraux
-   c) Des poissons mangeurs d'algues utiles
-   **d) Tout ce qui précède**
+4. Comment le blanchissement des coraux affecte-t-il les autres animaux marins ?
+   a) Ça ne les affecte pas du tout
+   b) Ils deviennent tous blancs aussi
+   **c) Ils perdent leur maison et leur source de nourriture**
+   d) Ils déménagent tous sur la terre ferme
 
-5. Qu'est-ce qui pourrait nous aider à faire pousser de nouveaux coraux pour remplacer ceux qui ont blanchi ?
-   a) Des pépinières de coraux
-   b) Des jardins de coraux sous-marins
-   c)  our bébés coraux
-   **d) Tout ce qui précède**
+5. Quel super-pouvoir pourrait aider à sauver les coraux ?
+   a) La capacité de parler aux poissons
+   b) Le pouvoir de contrôler les vagues
+   c) La capacité de créer des bulles protectrices
+   **d) Toutes les réponses ci-dessus**
 
-6. Lequel de ces éléments pourrait aider à protéger les coraux des fortes vagues pendant les tempêtes ?
-   a) Des oreillers sous-marins
-   b) Des casques pour coraux
-   **c) Des structures de récifs artificiels**
-   d) Des pare-chocs gonflables pour coraux
+6. Que peuvent faire les humains dans la vraie vie pour aider à protéger les coraux ?
+   a) Utiliser moins d'énergie pour réduire le réchauffement climatique
+   b) Utiliser des crèmes solaires respectueuses des récifs
+   c) Ne pas jeter de déchets dans l'océan
+   **d) Toutes les réponses ci-dessus**
 
-7. Qu'est-ce qui pourrait aider les coraux à obtenir la nourriture dont ils ont besoin quand ils sont blanchis ?
-   a) Des mangeoires sous-marines
-   b) Des vitamines pour coraux
-   c) Des paillettes d'algues utiles
-   **d) Tout ce qui précède**
+7. Si un corail est blanchi, est-il mort ?
+   a) Oui, il est toujours mort
+   **b) Non, il peut encore se rétablir si les conditions s'améliorent**
+   c) Non, il est juste endormi
+   d) Oui, mais il renaîtra comme un nouveau corail
 
-8. Lequel de ces éléments pourrait nous aider à surveiller de près les coraux pour voir s'ils vont mieux ?
-   a) Des caméras sous-marines
-   b) Des vérificateurs de santé des coraux
-   c) Des poissons espions
-   **d) Tout ce qui précède**
+8. Dans notre jeu, quel outil magique pourrait aider à replanter les coraux ?
+   a) Une baguette de plantation de corail
+   b) Des graines de corail volantes
+   c) SUn pinceau magique pour ajouter du corail
+   **d) Toutes les réponses ci-dessus**
 
-9. Qu'est-ce qui pourrait aider à éliminer les algues nuisibles qui poussent sur les coraux blanchis ?
-   a) Des aspirateurs sous-marins
-   b) Des créatures marines mangeuses d'algues
-   c) Des brosses spéciales pour coraux
-   **d) Tout ce qui précède**
+9. Pourquoi les récifs coralliens sont-ils si importants ?
+   a) Ils protègent les côtes des grosses vagues
+   b) Ils sont la maison de nombreux animaux marins
+   c) Ils aident à produire l'oxygène que nous respirons
+   **d) Toutes les réponses ci-dessus**
 
-10. Lequel de ces éléments pourrait aider à apprendre aux gens à protéger les coraux ?
-    a) Un récif de corail dans une boîte
-    b) Un jeu vidéo sur le métier de docteur des coraux
-    c) Un livre qui parle des aventures des coraux
-    **d) Tout ce qui précède**
+10. Dans notre jeu, comment pourrions-nous surveiller la santé des coraux ?
+    a) Avec des lunettes de vision corallienne
+    b) En envoyant des poissons espions
+    c) En utilisant un détecteur de couleur sous-marin
+    **d) Toutes les réponses ci-dessus**

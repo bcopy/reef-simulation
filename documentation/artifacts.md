@@ -1,10 +1,10 @@
 
 1. Coral Bleaching Quiz:
    - Underwater umbrellas
-   - Floating sunscreen ( ? )
+   - Giant sun shades
    - Giant algae (for shade)
    - Underwater ice cubes
-   - Special coral brushes
+   - Coral planting brushes
 
 2. Plastic Pollution Quiz:
    - Ocean vacuum cleaner
