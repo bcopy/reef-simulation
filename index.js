@@ -62,6 +62,59 @@ AFRAME.registerShader('stationary-caustics', {
   `
 });
 
+AFRAME.registerComponent('whitening-pass', {
+  schema: {
+    target: {type: 'selector'},
+    intensity: {type: 'number', default: 0.5}
+  },
+
+  init: function () {
+    this.effect = new THREE.ShaderPass({
+      uniforms: {
+        tDiffuse: { value: null },
+        intensity: { value: this.data.intensity }
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform sampler2D tDiffuse;
+        uniform float intensity;
+        varying vec2 vUv;
+        void main() {
+          vec4 texel = texture2D(tDiffuse, vUv);
+          gl_FragColor = mix(texel, vec4(1.0, 1.0, 1.0, texel.a), intensity);
+        }
+      `
+    });
+
+    this.el.sceneEl.renderer.addPass(this.effect);
+  },
+
+  update: function () {
+    this.effect.uniforms.intensity.value = this.data.intensity;
+  },
+
+  remove: function () {
+    this.el.sceneEl.renderer.removePass(this.effect);
+  },
+
+  tick: function () {
+    if (this.data.target.object3D) {
+      this.data.target.object3D.traverse((node) => {
+        if (node.isMesh) {
+          node.layers.enable(1);
+        }
+      });
+    }
+  }
+});
+
+
 // New water surface shader
 AFRAME.registerShader('water-surface', {
   schema: {
@@ -357,7 +410,7 @@ AFRAME.registerComponent('surface-placer', {
     const size = new THREE.Vector3();
     this.boundingBox.getSize(size);
 
-    // Calculate the offset to move the coral above the surface
+    // Calculate the offset to move the object below the surface
     const offsetY = size.y * (0.5 + this.data.leeway);
 
     // Adjust the position based on the scale ratio and bounding box
