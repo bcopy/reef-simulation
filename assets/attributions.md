@@ -1,1 +1,3 @@
 - water-plant.glb : "Water plant" (https://skfb.ly/o9BwM) by Nataly is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+- shark.glb : "Great White Shark" (https://skfb.ly/oQXVs) by Sealife Fan 3 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+- green-turtle.glb : "Model 46A - Subadult Green Sea Turtle" (https://skfb.ly/oyx9Z) by DigitalLife3D is licensed under Creative Commons Attribution-NonCommercial (http://creativecommons.org/licenses/by-nc/4.0/).
