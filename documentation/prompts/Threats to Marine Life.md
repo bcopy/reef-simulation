@@ -1,4 +1,4 @@
-Please use the following categories when creating or referring to quizz around ocean conservation.
+Please use the following categories when creating or referring to quiz around ocean conservation.
 
 # Categories of Threats to Marine Life
 
@@ -17,14 +17,6 @@ Please use the following categories when creating or referring to quizz around o
 13. Harmful Algal Blooms
 14. Aquaculture (when not managed sustainably)
 15. Ghost Fishing
-
-# E's shortlist
-
-1. Coral bleaching (nice and visual, color schemes etc...)
-2. Plastic Pollution
-4. Overfishing
-6. Climate change
-7. Marine Pollution
 
 ## Notes
 - These categories represent major threats to marine ecosystems.

@@ -32,7 +32,7 @@ Maintenant, testons tes connaissances sur le blanchissement des coraux et sur la
    **c) Ils perdent leur maison et leur source de nourriture**
    d) Ils déménagent tous sur la terre ferme
 
-5. Quel super-pouvoir pourrait aider à sauver les coraux ?
+5. Quel super-pouvoir pourrait aider à sauver les coraux dans notre jeu ?
    a) La capacité de parler aux poissons
    b) Le pouvoir de contrôler les vagues
    c) La capacité de créer des bulles protectrices
@@ -53,7 +53,7 @@ Maintenant, testons tes connaissances sur le blanchissement des coraux et sur la
 8. Dans notre jeu, quel outil magique pourrait aider à replanter les coraux ?
    a) Une baguette de plantation de corail
    b) Des graines de corail volantes
-   c) SUn pinceau magique pour ajouter du corail
+   c) Un sous-marin jardinier
    **d) Toutes les réponses ci-dessus**
 
 9. Pourquoi les récifs coralliens sont-ils si importants ?
